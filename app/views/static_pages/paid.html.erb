@@ -1,0 +1,11 @@
+
+
+<h1>Your payment has been confirmed.</h1>
+<p>Thanks for shopping with us.</p>
+
+<% session[:cart] = nil %>
+
+<% @@total = 0 %>
+<% @@qty = 0 %>
+<%= link_to 'Back to Experiences', items_path, :class =>"button" %>
+

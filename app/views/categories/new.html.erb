@@ -1,0 +1,14 @@
+<% if current_user.admin? %>
+<% if session[:login] == 1 %> 
+
+<h1>New Category</h1>
+
+<%= render 'form', category: @category %>
+
+<%= link_to 'Back', categories_path %>
+
+<% else %>
+<p id="notice"><%= notice %></p>
+Sorry. This page is restricted just to admin!
+<% end %>
+<% end %>

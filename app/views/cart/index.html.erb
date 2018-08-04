@@ -1,0 +1,98 @@
+<p id="notice"><%= notice %></p>
+<% total = 0 %>
+<% qty = 0 %>
+<% @@total = 0 %>
+<% @@qty = 0 %>
+
+<% if @cart.empty? %>
+<p>You have not added any items yet</p>
+
+
+
+<% else %>
+
+
+
+
+    <div id="itemsContainer">
+        <table id="customers">
+            
+           
+            <% @cart.each do |id, quantity| %>
+            
+            <% item = Item.find_by_id(id) %>
+            
+            <tr>
+                <td>
+                    <div class="image">
+                        <%= link_to (image_tag item.image_url, :style =>"height:40px"), item %>
+                        
+                    </div>
+                    
+                </td>
+                
+                <td class="title"><%= link_to item.title, item %></td>
+                
+                <td><a href="/cart/remove/<%= item.id %>" class="button">Remove From Cart</a></td>
+                
+                <td class="price"><%= number_to_currency(item.price, :unit =>"€") %></td>
+                
+                <td><a href="/cart/removeqty/<%= item.id %>" class="button">-</a></td>
+                
+                <td class="quantity"><%= quantity %></td>
+                
+                <td><a href="/cart/addqty/<%= item.id %>" class="button">+</a></td>
+                
+                <td class="price"><%= number_to_currency(quantity * item.price, :unit =>"€") %></td>
+                
+                
+                
+            </tr>
+            
+            <tr>
+                <% total += quantity * item.price %>
+                <% qty += quantity %>  
+                
+                <% @@total = total %>
+                <% @@qty = qty %>
+               
+               
+              
+              </tr>
+             <% end %>
+             
+             
+             <tr>
+                
+               <td colspan="2"> <a href="/checkout" class="button btn-block">Checkout</a> </td>
+               
+                
+                <td>
+               <a href="/cart/clearcart" class= "button btn-block"> Clear Cart</a>
+                 </td>
+              
+              
+              
+                <td>
+               
+               </td>
+               
+               
+               <td> <strong>Total quantity </strong> </td>
+               <td> <%= @@qty %></td>
+               <td> </td>
+               
+                <td>
+                <strong>Sub Total: <%= number_to_currency(@@total, :unit => "€") %></strong>
+                </td>
+               
+              
+              
+                 
+               </tr>
+               
+               
+               
+        </table>
+    </div>
+<% end %>

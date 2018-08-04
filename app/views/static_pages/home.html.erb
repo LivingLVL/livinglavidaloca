@@ -1,0 +1,29 @@
+
+
+<% @@total = 0 %>
+         <% @@qty = 0 %>
+
+<% provide(:title, "Home") %>
+
+<p id="notice"><%= notice %></p>
+<h1 class="cath1"><strong>Welcome to living la vida</strong></h1>
+<p class="homep">Life is the most beautiful gift we have, but you never know how long you have until it’s over. 
+That’s why I’m a big fan of doing things you want to do when you get the chance. Don’t wait for “Tomorrow” or “Someday”. 
+If you get the opportunity today, then do it today.
+Life is the craziest and ultimate experience that you are going to live, so rock it!</p>
+
+<% if session[:login] == 1 %> 
+<%= link_to 'New Category', new_category_path, :class =>"button", :role=>"button"  %>
+<%= link_to 'Manage Categories', "/categories" , :class =>"button", :role=>"button"  %>
+<% end %>
+<%=render 'layouts/categories'%>
+
+         
+        
+         
+    
+    
+
+
+
+

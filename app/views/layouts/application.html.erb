@@ -1,0 +1,119 @@
+
+
+
+
+
+ 
+ <!DOCTYPE html>
+<html>
+ 
+  <head>
+   <title><%= yield(:title) %> | Living La Vida Loca </title>
+   <%= csrf_meta_tags %>
+   
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    
+  
+   
+     
+     
+   </head>
+   
+     
+   <header class="headSec">
+   
+       
+      <h1 class="headtitle">Living La Vida Loca</h1>
+     
+     
+   
+    </header>
+    <body>
+     
+   <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="active navbar-brand" href="/"> L L V L</a>
+     </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href= "/items">Experiences</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href=""> About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+           
+            <li><%= link_to "Us", "/about" %></li>
+            <li><%= link_to "Contact", "/contact" %></li>
+            
+          </ul>
+        </li>
+        
+        <% if user_signed_in? %>
+        
+         <li><a href="/users/edit">Hi <%= current_user.firstname + " " + current_user.surname %></a></li>
+         <li><a href= "/cart" > Cart Items:  <%= @@qty %></a></li>
+         <li><a href= "/cart"> Subtotal: <%= number_to_currency(@@total, :unit => "€ ") %></a></li>
+         <li><%= link_to "View Orders", orders_path %></li>
+         
+         
+        <% else %>
+         <li><%= link_to "Cart", cart_path  %></li>
+        <% end %>
+        
+        
+        <li class=search1><%= render "layouts/search" %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+       <% if user_signed_in? %>
+        <!--- Admin check --->
+        <% if current_user.try(:admin?) %>
+         <% if session[:login] == 1 %>
+          <li><%= link_to "Admin Logout", logout_path %></li>
+         <% else %>
+          <li><%= link_to "Admin Login", login_path %></li>
+         <% end %>
+        <% end %>
+        <!--li><a href="Sign out"><span class="glyphicon glyphicon-log-in"></span> Sign Out </a></li-->
+        <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+       <% else %>
+        <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Register </a></li>
+        <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Sign In </a></li>
+       <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+     <div class="container">
+    <%= yield %>
+    
+    </div>
+    
+     
+    </body>
+
+    
+
+<footer class="foot">
+
+<p> Copyright &copy; All rights reserved </p>
+
+
+
+</footer>
+
+

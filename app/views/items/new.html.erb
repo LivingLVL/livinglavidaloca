@@ -1,0 +1,14 @@
+<% if current_user.admin? %>
+<% if session[:login] == 1 %> 
+
+<h1>New Item</h1>
+
+<%= render 'form', item: @item %>
+
+<%= link_to 'Back', items_path %>
+
+<% else %>
+<p id="notice"><%= notice %></p>
+Sorry. This page is restricted just to admin!
+<% end %>
+<% end %>
